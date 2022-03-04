@@ -57,6 +57,18 @@ public class Server {
         }).start();
     }
 
+    public void sendMovementToClient (String circleId) {
+        try {
+            bufferedWriter.write(circleId);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (IOException e){
+            e.printStackTrace();
+            System.out.println("Error sending message to the client.");
+            closeEverything(socket, bufferedReader, bufferedWriter);
+        }
+    }
+
     public void closeEverything (Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
         try {
             if (bufferedReader != null) {

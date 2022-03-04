@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,10 +14,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -36,17 +39,22 @@ public class Controller implements Initializable {
     @FXML
     private ScrollPane sp_main;
     @FXML
-    private Button buttonPiece1,buttonPiece2,buttonPiece3,buttonPiece4,buttonPiece5,buttonPiece6,buttonPiece7;
+    private Circle place1,place2,place3,place4,place5,place6,place7;
     @FXML
-    private ImageView pieceView1,pieceView2,pieceView3,pieceView4,pieceView5,pieceView6,pieceView7;
+    private Circle piece;
+    @FXML
+    private Pane pane;
 
     private Server server;
 
+    public Piece pieceClass;
+
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle) {
+        pieceClass= new Piece();
 
         try {
-            server = new Server( new ServerSocket(1234));
+            server = new Server(new ServerSocket(1234));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error creating server.");
@@ -60,35 +68,34 @@ public class Controller implements Initializable {
         });
 
         server.receiveMessageFromClient(vbox_messages);
-
-        button_send.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                String messageToSend = tf_message.getText();
-                if (!messageToSend.isEmpty()) {
-                    HBox hBox = new HBox();
-                    hBox.setAlignment(Pos.CENTER_RIGHT);
-                    hBox.setPadding(new Insets(5,5,5,10));
-
-                    Text text = new Text(messageToSend);
-                    TextFlow textFlow = new TextFlow(text);
-
-                    textFlow.setStyle("-fx-color: rgb(239,242,255);" +
-                            "-fx-background-color: rgb(15,125,242);" +
-                            "-fx-background-radius: 20px;");
-
-                    textFlow.setPadding(new Insets(5,10,5,10));
-                    text.setFill(Color.color(0.934,0.945,0.996));
-
-                    hBox.getChildren().add(textFlow);
-                    vbox_messages.getChildren().add(hBox);
-
-                    server.sendMessageToClient(messageToSend);
-                    tf_message.clear();
-                }
-            }
-        });
     }
+
+    public void onSendAction (ActionEvent event){
+
+        String messageToSend = tf_message.getText();
+        if (!messageToSend.isEmpty()) {
+            HBox hBox = new HBox();
+            hBox.setAlignment(Pos.CENTER_RIGHT);
+            hBox.setPadding(new Insets(5, 5, 5, 10));
+
+            Text text = new Text(messageToSend);
+            TextFlow textFlow = new TextFlow(text);
+
+            textFlow.setStyle("-fx-color: rgb(239,242,255);" +
+                    "-fx-background-color: rgb(15,125,242);" +
+                    "-fx-background-radius: 20px;");
+
+            textFlow.setPadding(new Insets(5, 10, 5, 10));
+            text.setFill(Color.color(0.934, 0.945, 0.996));
+
+            hBox.getChildren().add(textFlow);
+            vbox_messages.getChildren().add(hBox);
+
+            server.sendMessageToClient(messageToSend);
+            tf_message.clear();
+        }
+    }
+
 
     public static void addLabel (String messageFromClient, VBox vBox) {
         HBox hBox = new HBox();
@@ -112,37 +119,17 @@ public class Controller implements Initializable {
         });
     }
 
-    public void putPiece () {
-        Image bluePiece = new Image(getClass().getResourceAsStream("bluePiece.png"));
-        Image redPiece = new Image(getClass().getResourceAsStream("redPiece.png"));
+    public void mouseClicked (Event event) {
+        System.out.println(event);
+        Circle piece = ((Circle) event.getSource());
+        server.sendMovementToClient(piece.getId());
+        System.out.println(piece);
 
-        buttonPiece1.setOnAction( event -> {
-            pieceView1.setImage(bluePiece);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                piece.setFill(Paint.valueOf("RED"));
+            }
         });
-
-        buttonPiece2.setOnAction( event -> {
-            pieceView2.setImage(redPiece);
-        });
-
-        buttonPiece3.setOnAction( event -> {
-            pieceView3.setImage(bluePiece);
-        });
-
-        buttonPiece4.setOnAction( event -> {
-            pieceView4.setImage(bluePiece);
-        });
-
-        buttonPiece5.setOnAction( event -> {
-            pieceView5.setImage(bluePiece);
-        });
-
-        buttonPiece6.setOnAction( event -> {
-            pieceView6.setImage(bluePiece);
-        });
-
-        buttonPiece7.setOnAction( event -> {
-            pieceView7.setImage(bluePiece);
-        });
-
     }
 }
