@@ -128,7 +128,12 @@ public class Controller implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                piece.setFill(Paint.valueOf("RED"));
+                if (piece.getFill() == Paint.valueOf("RED")) {
+                    piece.setFill(Paint.valueOf("GREEN"));
+                } else {
+                    piece.setFill(Paint.valueOf("RED"));
+                    System.out.println(piece.getFill());
+                }
             }
         });
     }

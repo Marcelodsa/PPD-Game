@@ -31,13 +31,13 @@
       </ImageView>
       <Pane fx:id="pane" layoutX="565.0" layoutY="26.0" prefHeight="684.0" prefWidth="735.0">
          <children>
-            <Circle fx:id="place1" fill="DODGERBLUE" layoutX="356.0" layoutY="53.0" onMouseClicked="#mouseClicked" opacity="0.48" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="place3" fill="DODGERBLUE" layoutX="356.0" layoutY="395.0" onMouseClicked="#mouseClicked" opacity="0.48" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="place2" fill="DODGERBLUE" layoutX="187.0" layoutY="395.0" onMouseClicked="#mouseClicked" opacity="0.48" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="place4" fill="DODGERBLUE" layoutX="544.0" layoutY="395.0" onMouseClicked="#mouseClicked" opacity="0.48" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="place5" fill="DODGERBLUE" layoutX="673.0" layoutY="647.0" onMouseClicked="#mouseClicked" opacity="0.48" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="place7" fill="DODGERBLUE" layoutX="66.0" layoutY="647.0" onMouseClicked="#mouseClicked" opacity="0.48" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="place6" fill="DODGERBLUE" layoutX="360.0" layoutY="647.0" onMouseClicked="#mouseClicked" opacity="0.48" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="place1" fill="BLACK" layoutX="356.0" layoutY="53.0" onMouseClicked="#mouseClicked" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="place3" fill="BLACK" layoutX="356.0" layoutY="395.0" onMouseClicked="#mouseClicked" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="place2" fill="BLACK" layoutX="187.0" layoutY="395.0" onMouseClicked="#mouseClicked" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="place4" fill="BLACK" layoutX="544.0" layoutY="395.0" onMouseClicked="#mouseClicked" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="place5" fill="BLACK" layoutX="673.0" layoutY="647.0" onMouseClicked="#mouseClicked" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="place7" fill="BLACK" layoutX="66.0" layoutY="647.0" onMouseClicked="#mouseClicked" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="place6" fill="BLACK" layoutX="360.0" layoutY="647.0" onMouseClicked="#mouseClicked" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
    </children>
